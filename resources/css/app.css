@@ -474,19 +474,8 @@ body, html {
 }
 .search-input-block{
     margin-top: 1rem;
-    position: relative;
     width: 23%;
     display: flex;
 
 
-}
-.search-input-block p {
-    margin: auto 0;
-    padding: 0 1rem;
-    background: ;
-    border: 1px solid black;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
 }
