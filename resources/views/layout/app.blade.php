@@ -13,10 +13,11 @@
 
 <body>
     <x-navbar /> <!-- Include Navbar -->
-
+    
     <main>
         @yield('content')
     </main>
+    <x-footer />
 </body>
 
 </html>
