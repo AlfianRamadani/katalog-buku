@@ -1,12 +1,16 @@
-<div class="text-white">
-    <div>
-        <h1>Temukan informasi buku yang menarik di MyCabook, platform terbaik untuk pencinta buku!</h1>
-        <input name="search" type="text">
+<div class="search-container">
+    <div class="search-header">
+        <h1>Temukan informasi menarik tentang buku hanya di MyCabook!</h1>
+        <div class="search-input-block">
+            <input name="search" type="text" class="search-input">
+            <x-lucide-search  />
+        </div>
     </div>
-    <br>
-    <a href="">Novel</a>
-    <a href="">Cerpen</a>
-    <a href="">Sejarah</a>
-    <a href="">Komik</a>
-    <a href="">Manga</a>
+    <div class="search-links">
+        <a href="" class="search-link">Novel</a>
+        <a href="" class="search-link">Cerpen</a>
+        <a href="" class="search-link">Sejarah</a>
+        <a href="" class="search-link">Komik</a>
+        <a href="" class="search-link">Manga</a>
+    </div>
 </div>

@@ -2,10 +2,10 @@
     <div class="container">
         <!-- Logo -->
         <div class="navbar-brand">
-    <a href="/" class="brand-name">
-        <span class="brand-my">My</span><span class="brand-cabook">Cabook</span>
-    </a>
-</div>
+            <a href="/" class="brand-name">
+                <span class="brand-my">My</span><span class="brand-cabook">Cabook</span>
+            </a>
+        </div>
 
 
         <!-- Menu Utama -->
