@@ -1,7 +1,6 @@
 <?php
 
+use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home.home');
-});
+Route::get('/', [ViewController::class, 'home'])->name('home');

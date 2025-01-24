@@ -17,6 +17,8 @@
 <body>
     <x-navbar />
     <x-footer /> 
+    @include('home.partial.search')
+    <x-card :img={{ $cardData['img'] }} />
 </body>
 
 </html>
