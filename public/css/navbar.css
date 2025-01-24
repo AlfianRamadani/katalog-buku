@@ -1,0 +1,139 @@
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+/* Brand/Logo */
+.navbar-brand .brand-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0070f3;
+    text-decoration: none;
+}
+
+.navbar-brand .brand-name:hover {
+    color: #005bb5;
+}
+
+/* Navbar Menu */
+.navbar-menu {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-item {
+    text-decoration: none;
+    font-size: 1rem;
+    color: #4b5563;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-item:hover {
+    color: #0070f3;
+    transform: translateY(-2px);
+}
+
+/* Burger Menu (Mobile) */
+.burger-menu {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.burger-menu span {
+    width: 25px;
+    height: 3px;
+    background-color: #4b5563;
+    transition: background-color 0.3s ease;
+}
+
+.burger-menu:hover span {
+    background-color: #0070f3;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    background-color: #ffffff;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+}
+
+.mobile-item {
+    text-decoration: none;
+    color: #4b5563;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.mobile-item:hover {
+    background-color: #0070f3;
+    color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar-menu {
+        display: none;
+    }
+
+    .burger-menu {
+        display: flex;
+    }
+
+    .mobile-menu {
+        display: flex;
+    }
+}
+/* Gaya untuk tulisan "mycabook" */
+.brand-name {
+    font-size: 1.5rem; /* Ukuran font */
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.brand-my {
+    color: #000000; /* Warna biru untuk "my" */
+    font-weight: 400; /* Teks biasa */
+}
+
+.brand-cabook {
+    color: #0070f3; /* Warna hitam untuk "cabook" */
+    font-weight: 700; /* Teks tebal */
+}
