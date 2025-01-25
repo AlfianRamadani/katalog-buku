@@ -11,10 +11,15 @@
         </div>
     </div>
     <div class="flex gap-4 mt-4 justify-center text-center items-center">
-        <a class="min-w-20 h-6  bg-green-500 text-white rounded-lg hover:bg-green-600 transition" href="">Novel</a>
-        <a class="min-w-20 h-6 bg-green-500 text-white rounded-lg hover:bg-green-600 transition" href="">Cerpen</a>
-        <a class="min-w-20 h-6 bg-green-500 text-white rounded-lg hover:bg-green-600 transition" href="">Sejarah</a>
-        <a class="min-w-20 h-6 bg-green-500 text-white rounded-lg hover:bg-green-600 transition" href="">Komik</a>
-        <a class="min-w-20 h-6 bg-green-500 text-white rounded-lg hover:bg-green-600 transition" href="">Manga</a>
+        <a class="min-w-20 h-6  bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
+            href="">Novel</a>
+        <a class="min-w-20 h-6 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
+            href="">Cerpen</a>
+        <a class="min-w-20 h-6 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
+            href="">Sejarah</a>
+        <a class="min-w-20 h-6 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
+            href="">Komik</a>
+        <a class="min-w-20 h-6 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
+            href="">Manga</a>
     </div>
 </div>

@@ -18,4 +18,8 @@ class ViewController extends Controller
 
         return view('home.home', compact('cardData'));
     }
+    public function contact()
+    {
+        return view('contact.contact');
+    }
 }

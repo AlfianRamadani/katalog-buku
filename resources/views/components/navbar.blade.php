@@ -13,7 +13,7 @@
             <a href="/" class="nav-item">Home</a>
             <a href="/request-buku" class="nav-item">Request Buku</a>
             <a href="/about-us" class="nav-item">About Us</a>
-            <a href="/contact" class="nav-item">Contact</a>
+            <a href="{{ route('contact') }}" class="nav-item">Contact</a>
         </div>
 
         <!-- Burger Menu (untuk mobile) -->
