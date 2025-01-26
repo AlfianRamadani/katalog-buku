@@ -4,8 +4,10 @@
 
 @section('content')
     @include('home.partial.search')
-    <div class="grid grid-cols-5 gap-4 items-center justify-center">
+    <article class="grid grid-cols-5 gap-4 items-center justify-center">
         <x-card />
-    </div>
+        <x-card />
+        <x-card />
+    </article>
 
 @endsection
