@@ -16,9 +16,10 @@ return new class extends Migration
             $table->string('title');
             $table->string('author');
             $table->string('publisher');
-            $table->date('publication_year');
+            $table->string('publication_year');
             $table->string('isbn_number')->nullable();
             $table->text('description')->nullable();
+            $table->timestamps();
         });
     }
 

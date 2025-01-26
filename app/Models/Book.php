@@ -11,5 +11,5 @@ class Book extends Model
 
     protected $table = 'books';
     protected $primaryKey = 'id';
-    protected $fillable = ['nm_santri', 'tmp_lahir', 'tgl_lahir', 'alamat', 'no_hp'];
+    // protected $fillable = ['nm_santri', 'tmp_lahir', 'tgl_lahir', 'alamat', 'no_hp'];
 }
