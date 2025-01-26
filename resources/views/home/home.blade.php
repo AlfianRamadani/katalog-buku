@@ -4,8 +4,8 @@
 
 @section('content')
     @include('home.partial.search')
-
-    {{-- <x-card :img="$cardData['img']" /> --}}
-    <x-card />
+    <div class="grid grid-cols-5 gap-4 items-center justify-center">
+        <x-card />
+    </div>
 
 @endsection
