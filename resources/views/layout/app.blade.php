@@ -13,7 +13,9 @@
 </head>
 
 <body>
+
     <x-navbar />
+
     <main class="min-h-[67vh]">
         @yield('content')
     </main>

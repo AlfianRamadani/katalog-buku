@@ -479,3 +479,7 @@ body, html {
 
 
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
