@@ -22,4 +22,8 @@ class ViewController extends Controller
     {
         return view('contact.contact');
     }
+    public function requestBook()
+    {
+        return view('request');
+    }
 }
