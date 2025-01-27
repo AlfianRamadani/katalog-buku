@@ -4,11 +4,10 @@
 
 @section('content')
     @include('home.partial.search')
-    <x-request-book/>
+    <x-request-book />
     <article class="grid grid-cols-5 gap-4 items-center justify-center">
         <x-card />
         <x-card />
         <x-card />
     </article>
-
 @endsection
