@@ -10,13 +10,15 @@
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
     @vite('resources/css/app.css')
+    {{-- <script src="https://unpkg.com/@tailwindcss/browser@4"></script> --}}
+    <meta name="theme-color" content="#4285f4">
 </head>
 
 <body>
 
     <x-navbar />
 
-    <main class="min-h-[67vh]">
+    <main class="min-h-[67vh] px-10  md:px-20 lg:px-30 xl:px-40">
         @yield('content')
     </main>
     <x-footer />

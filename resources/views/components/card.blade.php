@@ -1,11 +1,21 @@
-    <div
-        class="bg-gradient-to-b from-gray-100 to-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-        <img src="https://id-static.z-dn.net/files/dbc/0f8b4e8885750cecabe1a6138a54352e.jpg" alt="Cover Buku 1"
-            class="w-full h-64 object-cover">
-        <div class="p-4">
-            <h3 class="text-lg font-semibold font-tahoma">Kisah Tanah Jawa</h3>
-            <p class="text-sm font-serif mt-2">Penulis: King</p>
-            <p class="text-sm font-serif">Genre: Fiksi</p>
-            <a href="#" class="text-sm text-red-600 font-medium hover:underline mt-4 block">Detail Buku</a>
-        </div>
+<div
+    class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 min-h-full transform hover:scale-105">
+    <div class="w-full h-48">
+        <img src="{{ $img }}" alt="Cover Buku" class="w-full h-full object-cover">
     </div>
+    <div class="flex flex-col w-full p-4">
+        <div class="flex justify-between items-center mb-3">
+            <h3 class="text-lg font-bold font-sans text-gray-800 truncate">{{ $title }}</h3>
+            <span class="text-xs font-medium text-gray-500 bg-gray-100 rounded-full px-2 py-1">
+                {{ $category }}
+            </span>
+        </div>
+        <p class="text-sm text-gray-600 leading-relaxed line-clamp-3 mb-4">
+            {{ $description }}
+        </p>
+        <a href="#"
+            class="text-sm font-medium text-blue-600 hover:underline transition-all duration-200 self-start">
+            Detail Buku →
+        </a>
+    </div>
+</div>

@@ -23,6 +23,10 @@ class BookFactory extends Factory
             'publication_year' => $this->faker->year,
             'isbn_number' => $this->faker->isbn13,
             'description' => $this->faker->paragraph,
+            'category' => $this->faker->word,
+            'sub_category' => $this->faker->word,
+            'language' => $this->faker->languageCode,
+            'cover' => asset('img.jpeg'),
         ];
     }
 }

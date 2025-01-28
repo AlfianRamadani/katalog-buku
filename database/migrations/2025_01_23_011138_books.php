@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('author');
+            $table->string('category');
+            $table->string('sub_category');
+            $table->string('language');
+            $table->string('cover');
             $table->string('publisher');
             $table->string('publication_year');
             $table->string('isbn_number')->nullable();
