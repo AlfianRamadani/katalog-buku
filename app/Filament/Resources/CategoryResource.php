@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -17,8 +18,12 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
 
+    public function viewAny(User $user): bool
+    {
+        return $user->isAdmin();
+    }
     public static function form(Form $form): Form
     {
         return $form
@@ -51,7 +56,7 @@ class CategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\SubCategoryRelationManager::class,
         ];
     }
 
@@ -63,4 +68,5 @@ class CategoryResource extends Resource
             'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
     }
+
 }
