@@ -11,5 +11,20 @@ class Book extends Model
 
     protected $table = 'books';
     protected $primaryKey = 'id';
-    // protected $fillable = ['nm_santri', 'tmp_lahir', 'tgl_lahir', 'alamat', 'no_hp'];
+    protected $fillable =  [
+        'title',
+        'author',
+        'category',
+        'sub_category',
+        'language',
+        'cover',
+        'publisher',
+        'publication_year',
+        'isbn_number',
+        'description',
+    ];
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

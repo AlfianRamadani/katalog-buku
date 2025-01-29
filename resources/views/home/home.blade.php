@@ -3,7 +3,7 @@
 @section('title', 'Home Page')
 
 @section('content')
-    @include('home.partial.search')
+    @include('home.partial.search', ['categories' => $categories])
     <div class="pb-40 ">
         <div class="grid md:grid-cols-4 grid-cols-2 pr-4 pb-10    gap-4   items-center" id="post-container">
             @foreach ($book as $item)

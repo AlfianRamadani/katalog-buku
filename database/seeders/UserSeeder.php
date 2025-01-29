@@ -2,19 +2,21 @@
 
 namespace Database\Seeders;
 
-use App\Models\Book;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class BookSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Book::factory()
-            ->count(100)
-            ->create();
+        User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'role' => 'admin',
+        ]);
     }
 }

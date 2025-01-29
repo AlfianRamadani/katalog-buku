@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,7 +24,7 @@ class BookFactory extends Factory
             'publication_year' => $this->faker->year,
             'isbn_number' => $this->faker->isbn13,
             'description' => $this->faker->paragraph,
-            'category' => $this->faker->word,
+            'category_id' => Category::inRandomOrder()->value('id'),
             'sub_category' => $this->faker->word,
             'language' => $this->faker->languageCode,
             'cover' => asset('img.jpeg'),

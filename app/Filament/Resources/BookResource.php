@@ -5,13 +5,14 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BookResource\Pages;
 use App\Filament\Resources\BookResource\RelationManagers;
 use App\Models\Book;
+
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+
 
 class BookResource extends Resource
 {
@@ -41,7 +42,7 @@ class BookResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('titles')
+                Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('author')
                     ->searchable(),
@@ -49,7 +50,9 @@ class BookResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('publication_year')
                     ->date()
-                    ->sortable(),
+                    ->sortable(),   
+                ImageColumn::make('cover')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('isbn_number')
                     ->searchable(),
             ])

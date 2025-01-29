@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx\Rels;
+use Illuminate\Support\Str;
 
 class ViewController extends Controller
 {
@@ -17,6 +20,7 @@ class ViewController extends Controller
         //     'description' => 'Deskripsi singkat tentang buku ini.',
         // ];
         $book = Book::orderBy('created_at', 'desc')->paginate(10);
+        $categories = Category::get();
         if ($request->ajax()) {
             return response()->json([
                 'posts' => $book->items(), // Data
@@ -24,7 +28,7 @@ class ViewController extends Controller
             ]);
         }
 
-        return view('home.home', compact('book'));
+        return view('home.home', compact('book', 'categories'));
     }
     public function contact()
     {
@@ -47,5 +51,28 @@ class ViewController extends Controller
             'posts' => $book->items(), // Kirim data post
             'nextPage' => $book->currentPage() < $book->lastPage() ? $book->currentPage() + 1 : null, // Halaman berikutnya
         ]);
+    }
+    public function posts(Request $request)
+    {
+        $category = $request->query('category');
+        $search = $request->query('search');
+        if (!$category && !$search) {
+            return redirect()->route('home');
+        }
+        $book = Book::whereHas('category', function ($query) use ($category) {
+            $query->where('name', $category);
+        })
+            ->where('title', 'like', "%$search%")
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+
+        return view('book_search', compact('book', 'category', 'search'));
+    }
+    public function post(String $slug)
+    {
+        $unslug = Str::replace('-', ' ', $slug);
+        $book = Book::where('title', $unslug . '.')->first();
+        return view('detail_book', compact('book'));
     }
 }
