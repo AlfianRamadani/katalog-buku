@@ -25,6 +25,7 @@ class BookFactory extends Factory
             'isbn_number' => $this->faker->isbn13,
             'description' => $this->faker->paragraph,
             'category_id' => Category::inRandomOrder()->value('id'),
+            'is_published' => $this->faker->boolean,
             'sub_category' => $this->faker->word,
             'language' => $this->faker->languageCode,
             'cover' => asset('img.jpeg'),

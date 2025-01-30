@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('sub_category');
             $table->string('language');
             $table->string('cover');
+            $table->boolean('is_published')->default(true);
             $table->string('publisher');
             $table->string('publication_year');
             $table->string('isbn_number')->nullable();
