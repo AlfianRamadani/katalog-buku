@@ -17,10 +17,9 @@ return new class extends Migration
             $table->string('title');
             $table->string('author');
             $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('sub_category');
             $table->string('language');
-            $table->string('cover');
-            $table->boolean('is_published')->default(true);
+            $table->text('cover');
+            $table->enum('status', ['available', 'not_available'])->default('available');
             $table->string('publisher');
             $table->string('publication_year');
             $table->string('isbn_number')->nullable();
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('books');
     }
 };

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\RequestBook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx\Rels;
@@ -34,10 +35,7 @@ class ViewController extends Controller
     {
         return view('contact.contact');
     }
-    public function requestBook()
-    {
-        return view('request');
-    }
+
     public function fetchPosts(Request $request)
     {
         $page = $request->get('page', 1);
@@ -74,5 +72,18 @@ class ViewController extends Controller
         $unslug = Str::replace('-', ' ', $slug);
         $book = Book::where('title', $unslug . '.')->first();
         return view('detail_book', compact('book'));
+    }
+
+    public function requestBook(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+        ]);
+        try {
+            RequestBook::create($request);
+            return redirect()->route('home')->with('status', true);
+        } catch (\Throwable $th) {
+            return redirect()->route('home')->with('status', false);
+        }
     }
 }

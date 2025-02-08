@@ -3,7 +3,7 @@
         <!-- Logo dan Deskripsi -->
         <div class="footer-brand">
             <a href="/" class="footer-logo">
-                <span class="brand-my">My</span><span class="brand-cabook">Cabook</span>
+                <span class="brand-my">My</span><span style="color: white;" class="brand-cabook">Cabook</span>
             </a>
             <p class="footer-description">
                 Jelajahi dunia literasi bersama kami. Temukan dan minta buku favoritmu dengan mudah!
