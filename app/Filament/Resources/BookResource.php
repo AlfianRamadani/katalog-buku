@@ -7,6 +7,8 @@ use App\Filament\Resources\BookResource\RelationManagers;
 use App\Models\Book;
 
 use Filament\Forms;
+use Illuminate\Support\Str;
+
 use Filament\Forms\Components\Actions;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Select;
@@ -18,7 +20,10 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\Button;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Http;
 
 class BookResource extends Resource
@@ -28,72 +33,97 @@ class BookResource extends Resource
     public static ?string $pluralModelLabel = 'Data Buku';
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->withoutGlobalScopes()->orderBy('created_at', 'desc');
+    }
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Section::make('ISBN (International Standard Book Number)')->description('Masukkan ISBN untuk mencari buku yang akan di tambahkan')->schema([
-                    Forms\Components\TextInput::make('isbn_number')
-                        ->label('Nomor ISBN')
-                        ->placeholder('Masukkan ISBN (jika ada)')
-                        ->numeric(),
-                    Actions::make([
-                        Action::make('Dapatkan data buku')
-                            ->icon('heroicon-m-book-open')
-                            ->action(function ($record) {
-                                dd($record);
-                            }),
-                    ]),
-                ]),
                 Forms\Components\Section::make('Informasi Buku')
                     ->description('Masukkan detail informasi tentang buku.')
                     ->schema([
-                        Forms\Components\TextInput::make('title')
-                            ->label('Judul Buku')
-                            ->placeholder('Masukkan judul buku')
-                            ->required(),
+                        Forms\Components\Grid::make(4)
+                            ->schema([
+                                Forms\Components\TextInput::make('isbn_number')
+                                    ->label('Nomor ISBN')
+                                    ->placeholder('Masukkan ISBN (jika ada)')
+                                    ->rule('regex:/^(97[89][\-\s]?)?\d{1,5}[\-\s]?\d{1,7}[\-\s]?\d{1,7}[\-\s]?[\dX]$/i')
+                                    ->columnSpan(4),
 
-                        Forms\Components\TextInput::make('author')
-                            ->label('Penulis')
-                            ->placeholder('Nama penulis buku')
-                            ->required(),
+                                Forms\Components\TextInput::make('title')
+                                    ->label('Judul Buku')
+                                    ->placeholder('Masukkan judul buku')
+                                    ->required()
+                                    ->columnSpan(2)
+                                    ->live(onBlur: true)
+                                    ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
+                                        if (($get('slug') ?? '') !== Str::slug($old)) {
+                                            return;
+                                        }
 
-                        Forms\Components\Select::make('category_id')
-                            ->label('Kategori')
-                            ->relationship('category', 'name')
-                            ->searchable()
-                            ->preload()
-                            ->required(),
+                                        $set('slug', Str::slug($state));
+                                    }),
+                                TextInput::make('slug')
+                                    ->label('Slug')
+                                    ->columnSpan(2),
+                            ]),
 
-                        Forms\Components\TextInput::make('sub_category')
-                            ->label('Sub Kategori')
-                            ->placeholder('Masukkan sub kategori'),
+                        Forms\Components\Grid::make(3)
+                            ->schema([
+                                Forms\Components\TextInput::make('author')
+                                    ->label('Penulis')
+                                    ->placeholder('Nama penulis buku')
+                                    ->required()
+                                    ->columnSpan(2),
 
-                        Forms\Components\TextInput::make('language')
-                            ->label('Bahasa')
-                            ->placeholder('Contoh: Indonesia, Inggris')
-                            ->required(),
+                                Forms\Components\Select::make('category_id')
+                                    ->label('Kategori')
+                                    ->relationship('category', 'name')
+                                    ->searchable()
+                                    ->preload()
+                                    ->required()
+                                    ->columnSpan(1),
+                            ]),
 
-                        Forms\Components\FileUpload::make('cover_url')
+                        Forms\Components\Grid::make(3)
+                            ->schema([
+                                Forms\Components\TextInput::make('language')
+                                    ->label('Bahasa')
+                                    ->placeholder('Contoh: Indonesia, Inggris')
+                                    ->required()
+                                    ->columnSpan(1),
+
+                                Forms\Components\TextInput::make('publisher')
+                                    ->label('Penerbit')
+                                    ->placeholder('Masukkan nama penerbit')
+                                    ->required()
+                                    ->columnSpan(1),
+
+                                Forms\Components\DatePicker::make('publication_year')
+                                    ->label('Tahun Terbit')
+                                    ->placeholder('Pilih tahun terbit')
+                                    ->format('Y')
+                                    ->required()
+                                    ->columnSpan(1),
+                            ]),
+
+                        Forms\Components\FileUpload::make('cover')
                             ->label('Cover Buku')
                             ->maxSize(2048)
+                            ->helperText('Ukuran maksimal 2MB, dan hanya menerima gambar')
+                            ->acceptedFileTypes(['image/*'])
                             ->columnSpanFull(),
-
-                        Forms\Components\TextInput::make('publisher')
-                            ->label('Penerbit')
-                            ->placeholder('Masukkan nama penerbit')
+                        Forms\Components\Select::make('status')
+                            ->label('Status Buku')
+                            ->options([
+                                'available' => 'Tersedia',
+                                'not_available' => 'Tidak Tersedia',
+                            ])
+                            ->default('available')
                             ->required(),
 
-                        Forms\Components\DatePicker::make('publication_year')
-                            ->label('Tahun Terbit')
-                            ->placeholder('Pilih tahun terbit')
-                            ->format('Y')
-                            ->required(),
-
-                        Forms\Components\Toggle::make('is_published')
-                            ->label('Status Publikasi')
-                            ->helperText('Tandai jika buku telah dipublikasikan')
-                            ->default(true),
                         Forms\Components\Textarea::make('description')
                             ->label('Deskripsi')
                             ->placeholder('Masukkan deskripsi singkat tentang buku')
@@ -104,22 +134,30 @@ class BookResource extends Resource
     }
 
 
+
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
+                    ->label("Judul Buku")
                     ->searchable(),
                 Tables\Columns\TextColumn::make('author')
+                    ->label("Penulis")
                     ->searchable(),
-                TextColumn::make('category.name'),
+                TextColumn::make('category.name')
+                    ->label('Kategori'),
                 Tables\Columns\TextColumn::make('publisher')
+                    ->label("Penerbit")
                     ->searchable(),
                 Tables\Columns\TextColumn::make('publication_year')
+                    ->label("Tahun Terbit")
                     ->date()
                     ->sortable(),
-                ImageColumn::make('cover'),
+                ImageColumn::make('cover')
+                    ->label("Cover Buku"),
                 Tables\Columns\TextColumn::make('isbn_number')
+                    ->label("ISBN")
                     ->searchable(),
             ])
             ->filters([
@@ -138,7 +176,6 @@ class BookResource extends Resource
     public static function fetchBookData($data)
     {
         $isbn = $data->isbn_number;
-        dd($isbn);
         $response = Http::get("https://www.googleapis.com/books/v1/volumes?q={$isbn}&key=" . config('key.google_api_key'));
 
         if ($response->successful()) {

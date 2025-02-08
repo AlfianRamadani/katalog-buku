@@ -1,6 +1,6 @@
 <div
     class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 min-h-full transform hover:scale-105">
-    <div class="w-full h-48">
+    <div class="w-full h-72  ">
         <img src="{{ $img }}" alt="Cover Buku" class="w-full h-full object-cover">
     </div>
     <div class="flex flex-col w-full p-4">
@@ -11,7 +11,7 @@
                 {{ $category->name }}
             </a>
         </div>
-        <p class="text-sm text-gray-600 leading-relaxed line-clamp-3 mb-4">
+        <p class="text-sm text-gray-600 leading-relaxed line-clamp-4 mb-4">
             {{ $description }}
         </p>
         <a href="{{ route('post', Str::slug($title)) }}"

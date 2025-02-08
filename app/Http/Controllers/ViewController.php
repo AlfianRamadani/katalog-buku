@@ -69,8 +69,7 @@ class ViewController extends Controller
     }
     public function post(String $slug)
     {
-        $unslug = Str::replace('-', ' ', $slug);
-        $book = Book::where('title', $unslug . '.')->first();
+        $book = Book::where('slug', $slug)->first();
         return view('detail_book', compact('book'));
     }
 

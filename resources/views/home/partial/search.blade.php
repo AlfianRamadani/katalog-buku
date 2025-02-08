@@ -24,7 +24,7 @@
     <div class="flex gap-3 mt-6 flex-wrap justify-center">
         @foreach ($categories as $category)
             <a href="/book?category={{ strtolower($category->name) }}"
-                class="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-teal-400 to-blue-500 text-white shadow-md hover:scale-105 transition-transform duration-300">
+                class="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-md hover:shadow-lg hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 ease-in-out transform hover:-translate-y-1">
                 {{ $category->name }}
             </a>
         @endforeach

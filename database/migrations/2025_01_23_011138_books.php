@@ -15,13 +15,14 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('author');
+            $table->string('author')->nullable();
             $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('language');
-            $table->text('cover');
+            $table->string('language')->nullable();
+            $table->text('cover')->nullable();
+            $table->text('slug')->nullable();
             $table->enum('status', ['available', 'not_available'])->default('available');
-            $table->string('publisher');
-            $table->string('publication_year');
+            $table->string('publisher')->nullable();
+            $table->string('publication_year')->nullable();
             $table->string('isbn_number')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();

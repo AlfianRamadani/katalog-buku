@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use function Illuminate\Support\Facades\asset;
 
 class Book extends Model
 {
@@ -17,24 +16,24 @@ class Book extends Model
     protected $fillable =  [
         'title',
         'author',
-        'category',
-        'sub_category',
+        'category_id',
+        'slug',
         'language',
         'cover',
         'publisher',
         'publication_year',
         'isbn_number',
+        'status',
         'description',
     ];
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
-    public function getCoverUrlAttribute()
+    public function getCoverAttribute($value)
     {
-        dd($this->cover);
-        return $this->cover
-            ? Storage::url($this->cover)
+        return $value
+            ? asset(Storage::url($value))
             : asset('img.jpeg');
     }
 }

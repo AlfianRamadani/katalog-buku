@@ -21,6 +21,6 @@
 
     <!-- Copyright -->
     <div class="footer-bottom">~
-        <p>&copy; {{ date('Y') }} <span>My <span class="highlight">Cabook</span></span>. All Rights Reserved .</p>
+        <p>&copy; {{ date('Y') }} <span>My <span class="brand-cabook">Cabook</span></span>. All Rights Reserved .</p>
     </div>
 </footer>
