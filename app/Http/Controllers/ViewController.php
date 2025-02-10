@@ -75,13 +75,14 @@ class ViewController extends Controller
 
     public function requestBook(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string',
         ]);
         try {
-            RequestBook::create($request);
+            RequestBook::create($validatedData);
             return redirect()->route('home')->with('status', true);
         } catch (\Throwable $th) {
+            dd($th);
             return redirect()->route('home')->with('status', false);
         }
     }

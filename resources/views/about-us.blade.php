@@ -36,8 +36,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Team Member Card -->
-                    <x-profile name="Alfian Ramadani" ig="https://instagram.com/alboyonnn"
-                        path="profile/alfian.jpg" />
+                    <x-profile name="Alfian Ramadani" ig="https://instagram.com/alboyonnn" path="profile/alfian.jpg" />
                     <x-profile name="Ayudya Aisyah Mutiaradinna" ig="https://instagram.com/asterlaverne"
                         path="profile/ayudya.jpg" />
                     <x-profile name="Taufiq Erik Herliansyah" ig="https://instagram.com/erikterl"

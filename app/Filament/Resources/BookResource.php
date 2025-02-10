@@ -164,6 +164,11 @@ class BookResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\Action::make('Cetak Katalog')
+                    ->label('Cetak Katalog')
+                    ->action(function ($record) {
+                        BookResource::printCatalog($record);
+                    }),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -171,6 +176,36 @@ class BookResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+    public static function printCatalog($data)
+    {
+        // Tentukan data yang ingin dicetak
+        $title = $data->title;
+        $author = $data->author;
+        $publisher = $data->publisher;
+        $publicationYear = $data->publication_year;
+        $isbnNumber = $data->isbn_number;
+
+        // Buat tampilan HTML untuk dicetak
+        $html = "
+            <html>
+                <head>
+                    <title>Katalog Buku</title>
+                </head>
+                <body>
+                    <h1>Katalog Buku</h1>
+                    <p><strong>Judul:</strong> {$title}</p>
+                    <p><strong>Penulis:</strong> {$author}</p>
+                    <p><strong>Penerbit:</strong> {$publisher}</p>
+                    <p><strong>Tahun Terbit:</strong> {$publicationYear}</p>
+                    <p><strong>ISBN:</strong> {$isbnNumber}</p>
+                </body>
+            </html>
+        ";
+
+        // Cetak tampilan HTML
+        echo $html;
+        echo "<script>window.print();</script>";
     }
 
     public static function fetchBookData($data)
