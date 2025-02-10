@@ -35,6 +35,10 @@ class RequestBookResource extends Resource
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('created_at')
+                    ->searchable()
+                    ->sortable(),
+
             ])
             ->filters([
                 //
