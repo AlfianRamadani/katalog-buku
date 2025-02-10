@@ -12,9 +12,9 @@
         </div>
         @if ($book->lastPage() > 1)
             <div class="flex justify-center mt-4">
-            <button id="load-more" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Muat Lebih Banyak..
-            </button>
+                <button id="load-more" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Muat Lebih Banyak..
+                </button>
             </div>
         @endif
 
