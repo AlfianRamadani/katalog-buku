@@ -67,6 +67,7 @@ class BookResource extends Resource
                                     }),
                                 TextInput::make('slug')
                                     ->label('Slug')
+                                    ->disabled()
                                     ->columnSpan(2),
                             ]),
 
