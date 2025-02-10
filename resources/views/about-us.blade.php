@@ -36,7 +36,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Team Member Card -->
-                    <x-profile name="Alfian Ramadani" ig="https://instagram.com/alfianramadhani_"
+                    <x-profile name="Alfian Ramadani" ig="https://instagram.com/alboyonnn"
                         path="profile/alfian.jpg" />
                     <x-profile name="Ayudya Aisyah Mutiaradinna" ig="https://instagram.com/asterlaverne"
                         path="profile/ayudya.jpg" />
@@ -46,7 +46,7 @@
                         path="profile/meka.jpg" />
                     <x-profile name="Naufal Zaki Ramadhan" ig="https://instagram.com/naufalrmdhan._"
                         path="profile/naufal.jpg" />
-                    <x-profile name="Maelinda Sa Firaaidah" ig="https://instagram.com/maexisnt" path="img.jpg" />
+                    <x-profile name="Maelinda Sa Firaaidah" ig="https://instagram.com/saexisnt" path="profile/mae.jpeg" />
                     <!-- Add more team members here -->
                 </div>
             </div>
