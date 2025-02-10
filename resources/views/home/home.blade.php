@@ -10,11 +10,13 @@
                 <x-card :img="$item->cover" :category="$item->category" :title="$item->title" :description="$item->description" />
             @endforeach
         </div>
-        <div class="flex justify-center mt-4">
+        @if ($book->lastPage() > 1)
+            <div class="flex justify-center mt-4">
             <button id="load-more" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Muat Lebih Banyak..
             </button>
-        </div>
+            </div>
+        @endif
 
     </div>
     <div class="pb-20">
