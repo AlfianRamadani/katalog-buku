@@ -1,5 +1,9 @@
 @extends('layout.app')
 
+@section('content')
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,14 +32,12 @@
                 <!-- Team Member 1 -->
                 <div class="col-md-4">
                     <div class="card shadow-sm team-card">
-                        <img src="https://cdn1-production-images-kly.akamaized.net/wNge5A1Cn7radV1m3P3jjPqB33Y=/1200x900/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/4778606/original/027554900_1710919886-20240320BL_Preskon_Prematch_Timnas_Indonesia_Vs_Vietnam_15.JPG" class="card-img-top rounded-circle mx-auto mt-3" alt="Team Member 1" style="width: 18 0px; height: 180px; border: 4px solid white;">
+                        <img src= {{asset('profile/alfian.jpg')}} class="card-img-top rounded-circle mx-auto mt-3" alt="Team Member 1" style="width: 18 0px; height: 180px; border: 4px solid white;">
                         <div class="card-body">
-                            <h5 class="card-title">John Doe</h5>
-                            <p class="card-text">CEO & Founder</p>
+                            <h5 class="card-title">Alfian Ramadhani</h5>
+                            <p class="card-text"></p>
                             <div class="social-icons mt-3">
-                                <a href="https://instagram.com/johndoe" target="_blank" class="text-dark mx-2"><i class="fab fa-instagram fa-lg"></i></a>
-                                <a href="https://twitter.com/johndoe" target="_blank" class="text-dark mx-2"><i class="fab fa-twitter fa-lg"></i></a>
-                                <a href="https://linkedin.com/in/johndoe" target="_blank" class="text-dark mx-2"><i class="fab fa-linkedin fa-lg"></i></a>
+                                <a href="https://instagram.com/alboyonnn" target="_blank" class="text-dark mx-2"><i class="fab fa-instagram fa-lg"></i></a>
                             </div>
                         </div>
                     </div>
@@ -43,14 +45,13 @@
                 <!-- Team Member 2 -->
                 <div class="col-md-4">
                     <div class="card shadow-sm team-card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3yLsgONMss-PI416BmKdxUc4rd6Dtv-9WUA&s" class="card-img-top rounded-circle mx-auto mt-3" alt="Team Member 2" style="width: 180px; height: 180px; border: 4px solid white;">
+                        <img src={{asset('profile/ayudya.jpg')}} class="card-img-top rounded-circle mx-auto mt-3" alt="Team Member 2" style="width: 180px; height: 180px; border: 4px solid white;">
                         <div class="card-body">
-                            <h5 class="card-title">Jane Smith</h5>
-                            <p class="card-text">CTO</p>
+                            <h5 class="card-title">Ayudya Aisyah Mutiaradinna</h5>
+                            <p class="card-text"></p>
                             <div class="social-icons mt-3">
-                                <a href="https://instagram.com/janesmith" target="_blank" class="text-dark mx-2"><i class="fab fa-instagram fa-lg"></i></a>
-                                <a href="https://twitter.com/janesmith" target="_blank" class="text-dark mx-2"><i class="fab fa-twitter fa-lg"></i></a>
-                                <a href="https://linkedin.com/in/janesmith" target="_blank" class="text-dark mx-2"><i class="fab fa-linkedin fa-lg"></i></a>
+                                <a href="https://instagram.com/asterlaverne" target="_blank" class="text-dark mx-2"><i class="fab fa-instagram fa-lg"></i></a>
+                               
                             </div>
                         </div>
                     </div>
@@ -58,14 +59,13 @@
                 <!-- Team Member 3 -->
                 <div class="col-md-4">
                     <div class="card shadow-sm team-card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3yLsgONMss-PI416BmKdxUc4rd6Dtv-9WUA&s" class="card-img-top rounded-circle mx-auto mt-3" alt="Team Member 3" style="width: 180px; height: 180px; border: 4px solid white;">
+                        <img src={{asset('profile/Taufiq.jpg')}} class="card-img-top rounded-circle mx-auto mt-3" alt="Team Member 3" style="width: 180px; height: 180px; border: 4px solid white;">
                         <div class="card-body">
-                            <h5 class="card-title">Mike Johnson</h5>
-                            <p class="card-text">Head of Operations</p>
+                            <h5 class="card-title">Taufik Erik Herliansyah</h5>
+                            <p class="card-text"></p>
                             <div class="social-icons mt-3">
-                                <a href="https://instagram.com/mikejohnson" target="_blank" class="text-dark mx-2"><i class="fab fa-instagram fa-lg"></i></a>
-                                <a href="https://twitter.com/mikejohnson" target="_blank" class="text-dark mx-2"><i class="fab fa-twitter fa-lg"></i></a>
-                                <a href="https://linkedin.com/in/mikejohnson" target="_blank" class="text-dark mx-2"><i class="fab fa-linkedin fa-lg"></i></a>
+                                <a href="https://instagram.com/erikterl" target="_blank" class="text-dark mx-2"><i class="fab fa-instagram fa-lg"></i></a>
+                              
                             </div>
                         </div>
                     </div>
@@ -73,14 +73,13 @@
                 <!--team member 4-->
                                 <div class="col-md-4">
                     <div class="card shadow-sm team-card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3yLsgONMss-PI416BmKdxUc4rd6Dtv-9WUA&s" class="card-img-top rounded-circle mx-auto mt-3" alt="Team Member 3" style="width: 180px; height: 180px; border: 4px solid white;">
+                        <img src={{asset('profile/meka.jpg')}} class="card-img-top rounded-circle mx-auto mt-3" alt="Team Member 3" style="width: 180px; height: 180px; border: 4px solid white;">
                         <div class="card-body">
-                            <h5 class="card-title">Mike Johnson</h5>
-                            <p class="card-text">Head of Operations</p>
+                            <h5 class="card-title">Syera Salsabilla Mecha</h5>
+                            <p class="card-text"></p>
                             <div class="social-icons mt-3">
-                                <a href="https://instagram.com/mikejohnson" target="_blank" class="text-dark mx-2"><i class="fab fa-instagram fa-lg"></i></a>
-                                <a href="https://twitter.com/mikejohnson" target="_blank" class="text-dark mx-2"><i class="fab fa-twitter fa-lg"></i></a>
-                                <a href="https://linkedin.com/in/mikejohnson" target="_blank" class="text-dark mx-2"><i class="fab fa-linkedin fa-lg"></i></a>
+                                <a href="https://instagram.com/syeraslsblla" target="_blank" class="text-dark mx-2"><i class="fab fa-instagram fa-lg"></i></a>
+                                
                             </div>
                         </div>
                     </div>
@@ -88,14 +87,13 @@
                 <!--team member 5-->
                 <div class="col-md-4">
                     <div class="card shadow-sm team-card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3yLsgONMss-PI416BmKdxUc4rd6Dtv-9WUA&s" class="card-img-top rounded-circle mx-auto mt-3" alt="Team Member 3" style="width: 180px; height: 180px; border: 4px solid white;">
+                        <img src={{asset('profile/naufal.jpg')}} class="card-img-top rounded-circle mx-auto mt-3" alt="Team Member 3" style="width: 180px; height: 180px; border: 4px solid white;">
                         <div class="card-body">
-                            <h5 class="card-title">Mike Johnson</h5>
-                            <p class="card-text">Head of Operations</p>
+                            <h5 class="card-title">Naufal Zaki Ramadhan</h5>
+                            <p class="card-text"></p>
                             <div class="social-icons mt-3">
-                                <a href="https://instagram.com/mikejohnson" target="_blank" class="text-dark mx-2"><i class="fab fa-instagram fa-lg"></i></a>
-                                <a href="https://twitter.com/mikejohnson" target="_blank" class="text-dark mx-2"><i class="fab fa-twitter fa-lg"></i></a>
-                                <a href="https://linkedin.com/in/mikejohnson" target="_blank" class="text-dark mx-2"><i class="fab fa-linkedin fa-lg"></i></a>
+                                <a href="https://instagram.com/naufalrmdhan._" target="_blank" class="text-dark mx-2"><i class="fab fa-instagram fa-lg"></i></a>
+                              
                             </div>
                         </div>
                     </div>
@@ -105,12 +103,11 @@
                     <div class="card shadow-sm team-card">
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3yLsgONMss-PI416BmKdxUc4rd6Dtv-9WUA&s" class="card-img-top rounded-circle mx-auto mt-3" alt="Team Member 3" style="width: 180px; height: 180px; border: 4px solid white;">
                         <div class="card-body">
-                            <h5 class="card-title">Mike Johnson</h5>
-                            <p class="card-text">Head of Operations</p>
+                            <h5 class="card-title">Maelinda Sa Firaaidah</h5>
+                            <p class="card-text"></p>
                             <div class="social-icons mt-3">
-                                <a href="https://instagram.com/mikejohnson" target="_blank" class="text-dark mx-2"><i class="fab fa-instagram fa-lg"></i></a>
-                                <a href="https://twitter.com/mikejohnson" target="_blank" class="text-dark mx-2"><i class="fab fa-twitter fa-lg"></i></a>
-                                <a href="https://linkedin.com/in/mikejohnson" target="_blank" class="text-dark mx-2"><i class="fab fa-linkedin fa-lg"></i></a>
+                                <a href="https://instagram.com/maexisnt" target="_blank" class="text-dark mx-2"><i class="fab fa-instagram fa-lg"></i></a>
+                               
                             </div>
                         </div>
                     </div>
@@ -147,3 +144,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+@endsection

@@ -11,9 +11,9 @@
         <!-- Menu Utama -->
         <div class="navbar-menu">
             <a href="/" class="nav-item">Home</a>
-            <a href="/request-buku" class="nav-item">Request Buku</a>
-            <a href="/about-us" class="nav-item">About Us</a>
-            <a href="{{ route('contact') }}" class="nav-item">Contact</a>
+            {{-- <a href="/request-buku" class="nav-item">Request Buku</a> --}}
+            <a href="/about-us" class="nav-item">Tentang Kami</a>
+            <a href="{{ route('contact') }}" class="nav-item">Kontak</a>
         </div>
 
         <!-- Burger Menu (untuk mobile) -->
@@ -27,8 +27,8 @@
     <!-- Mobile Dropdown Menu -->
     <div class="mobile-menu" id="mobile-menu">
         <a href="/" class="mobile-item">Home</a>
-        <a href="/request-buku" class="mobile-item">Request Buku</a>
-        <a href="/about-us" class="mobile-item">About Us</a>
-        <a href="/contact" class="mobile-item">Contact</a>
+        {{-- <a href="/request-buku" class="mobile-item">Request Buku</a> --}}
+        <a href="/about-us" class="mobile-item">Tentang Kami</a>
+        <a href="/contact" class="mobile-item">Kontak</a>
     </div>
 </nav>

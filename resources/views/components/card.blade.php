@@ -1,74 +1,47 @@
-<div class="container mt-5">
-    <div class="grid grid-cols-1 sm:grid-cols-5 md:grid-cols-3 lg:grid-cols-5 gap-5">
-        <!-- Card 1 -->
-        <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">            <img src="https://id-static.z-dn.net/files/dbc/0f8b4e8885750cecabe1a6138a54352e.jpg" alt="Cover Buku 1" class="w-full h-64 object-cover">
-        <div class="p-4">      
-                <h3 style="font-size:110%; font-family:Tahoma; ">Kisah Tanah Jawa</h3>
-                <br>
-                <p style="font-size:80%; font-family:serif;">Penulis : King</p>
-                <p style="font-size:80%; font-family:serif;">Genre : Fiksi.</p>
-                <br>
-                <br> 
-                <a href="#" class="text-sm text-red-600 font-medium hover:underline mt-8 block:">Detail Buku</a>
+<div
+    class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group relative border border-gray-100">
+    <!-- Image Section -->
+    <div class="h-48 w-full relative overflow-hidden rounded-t-xl">
+        <img src="{{ $img }}" alt="Cover Buku {{ $title }}"
+            class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105">
+        <!-- Category Badge -->
+        <div class="absolute top-2 right-2">
+            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">
+                {{ $category->name }}
+            </span>
+        </div>
+    </div>
+
+    <!-- Content Section -->
+    <div class="p-4 flex flex-col h-[calc(100%-12rem)]">
+        <!-- Title and Author -->
+        <h3 class="font-merriweather font-bold text-gray-800 truncate-2-lines mb-2 leading-tight">
+            {{ $title }}
+        </h3>
+
+        <!-- Rating -->
+        <div class="flex items-center mb-2">
+            <div class="flex text-yellow-400">
+                ★★★★★
             </div>
+            <span class="text-xs text-gray-500 ml-2">(4.9)</span>
         </div>
 
-        <!-- Card 2 -->
-        <div class="bg-gradient-to-b from-gray-100 to-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-            <img src="https://images.tokopedia.net/img/cache/700/product-1/2020/3/15/77513749/77513749_529ee48b-788c-4986-a3a2-5bc7ea52b072_800_800" alt="Cover Buku 2" class="w-full h-64 object-cover">
-            <div class="p-4">      
-                <h3 style="font-size:110%; font-family:verdana; ">Bulan</h3>
-                <br>
-                <p style="font-size:80%; font-family:serif;">Penulis : King</p>
-                <p style="font-size:80%; font-family:serif;">Genre : Fiksi.</p>
-                <br>
-                <br> 
-                <a href="#" class="text-sm text-red-600 font-medium hover:underline mt-8 block:">Detail Buku</a>
-            </div>
+        <!-- Description -->
+        <p class="text-sm text-gray-600 line-clamp-3 mb-4 font-roboto leading-relaxed">
+            {{ $description }}
+        </p>
+
+        <!-- Bottom Section -->
+        <div class="mt-auto pt-2 border-t border-gray-100">
+            <a href="{{ route('post', Str::slug($title)) }}"
+                class="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center transition-all">
+                Lihat Detail
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </a>
         </div>
-
-        <!-- Card 3 -->
-        <div class="bg-gradient-to-b from-gray-100 to-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-            <img src="https://img.bukabuku.net/product/3/2/32d91448f1059a50a8d7acc63b3588a5.jpg" alt="Cover Buku 3" class="w-full h-64 object-cover">
-            <div class="p-4">      
-                <h3 style="font-size:110%; font-family:verdana; ">Perahu Kertas</h3>
-                <br>
-                <p style="font-size:80%; font-family:serif;">Penulis : King</p>
-                <p style="font-size:80%; font-family:serif;">Genre : Fiksi.</p>
-                <br>
-                <br> 
-                <a href="#" class="text-sm text-red-600 font-medium hover:underline mt-8 block:">Detail Buku</a>
-            </div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="bg-gradient-to-b from-gray-100 to-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-            <img src="https://bukukita.com/babacms/displaybuku/117226_f.jpg" alt="Cover Buku 4" class="w-full h-64 object-cover">
-            <div class="p-4">      
-                <h3 style="font-size:110%; font-family:verdana;   ">Pergi</h3>
-                <br>
-                <p style="font-size:80%; font-family:serif;">Penulis : King</p>
-                <p style="font-size:80%; font-family:serif;">Genre : Fiksi.</p>
-                <br>
-                <br> 
-                <a href="#" class="text-sm text-red-600 font-medium hover:underline mt-8 block:">Detail Buku</a>
-            </div>
-        </div>
-
-        <!-- Card 5 -->
-        <div class="bg-gradient-to-b from-gray-100 to-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-            <img src="https://bukukita.com/babacms/displaybuku/117225_f.jpg" alt="Cover Buku 5" class="w-full h-64 object-cover">
-            <div class="p-4">      
-                <h3 style="font-size:110%; font-family:verdana; ">Pulang</h3>
-                <br>
-                <p style="font-size:80%; font-family:serif;">Penulis : King</p>
-                <p style="font-size:80%; font-family:serif;">Genre : Fiksi.</p>
-                <br>
-                <br> 
-                <a href="#" class="text-sm text-red-600 font-medium hover:underline mt-8 block:">Detail Buku</a>
-            </div>
-        </div>
-
-
-    </div>
+    </div>
 </div>
