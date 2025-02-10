@@ -26,9 +26,9 @@ class BookExport implements FromCollection, WithHeadings, WithTitle
     {
         return Book::select(
             'title',
+            'slug',
             'author',
-            'category',
-            'sub_category',
+            'category_id',
             'language',
             'cover',
             'publisher',
@@ -42,9 +42,9 @@ class BookExport implements FromCollection, WithHeadings, WithTitle
     {
         return [
             'title',
+            'slug',
             'author',
-            'category',
-            'sub_category',
+            'category_id',
             'language',
             'cover',
             'publisher',
