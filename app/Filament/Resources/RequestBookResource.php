@@ -36,6 +36,7 @@ class RequestBookResource extends Resource
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label('Pada Tanggal')
                     ->searchable()
                     ->sortable(),
 
