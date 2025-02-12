@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('deadline')->nullable();
             $table->text('information')->nullable();
             $table->string('staff_id');
-            $table->foreign('staff_id')->on('users')->references('id')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('staff_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
