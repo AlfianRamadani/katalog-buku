@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('publication_year')->nullable();
             $table->string('isbn_number')->nullable();
             $table->text('description')->nullable();
+            $table->integer('stock')->nullable();
             $table->timestamps();
         });
     }
