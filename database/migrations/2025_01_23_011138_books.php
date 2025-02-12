@@ -1,4 +1,4 @@
-<?php
+                    <?php
 
 use App\Models\Category;
 use Illuminate\Database\Migrations\Migration;

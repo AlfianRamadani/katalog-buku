@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(Book::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->date('deadline')->nullable();
             $table->text('information')->nullable();
-            $table->string('staff_id');
+            $table->unsignedBigInteger('staff_id');
             $table->foreign('staff_id')->on('users')->references('id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('history_loan_book');
     }
 };
