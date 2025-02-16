@@ -19,11 +19,11 @@ class RequestBookResource extends Resource
     protected static ?string $model = RequestBook::class;
     protected static ?string $navigationLabel = 'Request Buku';
     public static ?string $pluralModelLabel = 'Request Data Buku';
+    protected static ?string $navigationIcon = 'heroicon-o-arrow-path-rounded-square';
     public static function canViewAny(): bool
     {
         return auth()->guard('web')->user()->isAdmin();
     }
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {

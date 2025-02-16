@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('history_loan_book', function (Blueprint $table) {
+        Schema::create('history_loan_books', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
             $table->string('member_id')->nullable();
