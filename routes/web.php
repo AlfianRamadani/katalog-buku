@@ -1,6 +1,7 @@
 <?php
 
 use App\Exports\TemplateExport;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
@@ -21,3 +22,6 @@ Route::get('/download-template', function () {
 })->name('download-template');
 
 Route::post('/request/book', [ViewController::class, 'requestBook'])->name('request_book');
+
+Route::post('/contact/post', [ContactController::class, 'store'])->name('contact.store');
+

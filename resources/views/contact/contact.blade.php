@@ -30,7 +30,8 @@
 
             <!-- Bagian Kanan -->
             <div class="bg-green-900 p-8 rounded-lg shadow-md">
-                <form action="#" method="POST" class="space-y-6">
+            <form action="{{ route('contact.store') }}" method="POST" class="space-y-6">
+                @csrf
                     <div>
                         <label for="name" class="block text-white font-bold mb-2">Nama Anda *</label>
                         <input type="text" id="name" name="name"
