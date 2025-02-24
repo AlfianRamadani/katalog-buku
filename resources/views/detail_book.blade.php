@@ -16,8 +16,17 @@
                 <!-- Title -->
                 <div class="flex items-center gap-2 text-yellow-500">
                     <h1 class="text-3xl font-semibold text-gray-800">{{ $book->title }}</h1>
-                    <x-lucide-star class="w-8 h-8" />
-                    <span class="text-xl font-semibold">4.5</span> <!-- Gantilah dengan rating dinamis -->
+                    @for ($i = 1; $i <= 5; $i++)
+                        @if ($book->rate < $i)
+                            <span class="text-xl text-slate-200">
+                                ★
+                            </span>
+                        @else
+                            <span class="text-xl text-yellow-400">
+                                ★
+                            </span>
+                        @endif
+                    @endfor <span class="text-xl font-semibold">({{ $book->rate }})</span>
                 </div>
 
                 <p class="text-base text-gray-700 leading-relaxed">

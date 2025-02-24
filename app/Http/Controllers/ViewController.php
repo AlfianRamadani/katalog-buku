@@ -77,6 +77,8 @@ class ViewController extends Controller
         if (!$book) {
             return view('404')->with('slug', $slug);
         }
+        $book->rate = $book->review->avg('rate') ?? 0;
+        $book->makeHidden('review');
         $reviews = Review::where('book_id', $book->id)->paginate(3);
         return view('detail_book', compact('book', 'reviews'));
     }
