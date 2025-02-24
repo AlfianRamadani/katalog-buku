@@ -44,19 +44,19 @@ class BookResource extends Resource
                 Forms\Components\Section::make('Informasi Buku')
                     ->description('Masukkan detail informasi tentang buku.')
                     ->schema([
-                        Forms\Components\Grid::make(4)
+                        Forms\Components\Grid::make(3)
                             ->schema([
                                 Forms\Components\TextInput::make('isbn_number')
                                     ->label('Nomor ISBN')
                                     ->placeholder('Masukkan ISBN (jika ada)')
                                     ->rule('regex:/^(97[89][\-\s]?)?\d{1,5}[\-\s]?\d{1,7}[\-\s]?\d{1,7}[\-\s]?[\dX]$/i')
-                                    ->columnSpan(4),
+                                    ->columnSpan(3),
 
                                 Forms\Components\TextInput::make('title')
                                     ->label('Judul Buku')
                                     ->placeholder('Masukkan judul buku')
                                     ->required()
-                                    ->columnSpan(2)
+                                    ->columnSpan(3)
                                     ->live(onBlur: true)
                                     ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
                                         if (($get('slug') ?? '') !== Str::slug($old)) {
@@ -68,7 +68,7 @@ class BookResource extends Resource
                                 TextInput::make('slug')
                                     ->label('Slug')
                                     ->readOnly()
-                                    ->columnSpan(1),
+                                    ->columnSpan(3),
                             ]),
 
                         Forms\Components\Grid::make(3)
