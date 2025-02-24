@@ -67,7 +67,8 @@ class BookResource extends Resource
                                     }),
                                 TextInput::make('slug')
                                     ->label('Slug')
-                                    ->disabled()
+                                    ->readOnly()
+
                                     ->columnSpan(2),
                             ]),
 
@@ -85,13 +86,70 @@ class BookResource extends Resource
                                     ->searchable()
                                     ->preload()
                                     ->required()
+                                    ->createOptionForm([
+                                        Forms\Components\TextInput::make('name')
+                                            ->label('Nama Kategori')
+                                            ->required(),
+                                    ])
                                     ->columnSpan(1),
                             ]),
 
                         Forms\Components\Grid::make(3)
                             ->schema([
-                                Forms\Components\TextInput::make('language')
+                                Forms\Components\Select::make('language')
                                     ->label('Bahasa')
+                                    ->options([
+                                        'Indonesia' => 'Bahasa Indonesia',
+                                        'Inggris' => 'Bahasa Inggris',
+                                        'Spanyol' => 'Bahasa Spanyol',
+                                        'Prancis' => 'Bahasa Prancis',
+                                        'Jerman' => 'Bahasa Jerman',
+                                        'Mandarin' => 'Bahasa Mandarin',
+                                        'Jepang' => 'Bahasa Jepang',
+                                        'Korea' => 'Bahasa Korea',
+                                        'Arab' => 'Bahasa Arab',
+                                        'Portugis' => 'Bahasa Portugis',
+                                        'Rusia' => 'Bahasa Rusia',
+                                        'Italia' => 'Bahasa Italia',
+                                        'Belanda' => 'Bahasa Belanda',
+                                        'Swedia' => 'Bahasa Swedia',
+                                        'Norwegia' => 'Bahasa Norwegia',
+                                        'Denmark' => 'Bahasa Denmark',
+                                        'Finlandia' => 'Bahasa Finlandia',
+                                        'Polandia' => 'Bahasa Polandia',
+                                        'Ceko' => 'Bahasa Ceko',
+                                        'Hungaria' => 'Bahasa Hungaria',
+                                        'Yunani' => 'Bahasa Yunani',
+                                        'Turki' => 'Bahasa Turki',
+                                        'Vietnam' => 'Bahasa Vietnam',
+                                        'Thailand' => 'Bahasa Thailand',
+                                        'Filipina' => 'Bahasa Filipina',
+                                        'Malaysia' => 'Bahasa Malaysia',
+                                        'Hindi' => 'Bahasa Hindi',
+                                        'Bengali' => 'Bahasa Bengali',
+                                        'Punjabi' => 'Bahasa Punjabi',
+                                        'Tamil' => 'Bahasa Tamil',
+                                        'Telugu' => 'Bahasa Telugu',
+                                        'Marathi' => 'Bahasa Marathi',
+                                        'Gujarati' => 'Bahasa Gujarati',
+                                        'Kannada' => 'Bahasa Kannada',
+                                        'Malayalam' => 'Bahasa Malayalam',
+                                        'Urdu' => 'Bahasa Urdu',
+                                        'Persia' => 'Bahasa Persia',
+                                        'Hebrew' => 'Bahasa Hebrew',
+                                        'Ukraina' => 'Bahasa Ukraina',
+                                        'Rumania' => 'Bahasa Rumania',
+                                        'Bulgaria' => 'Bahasa Bulgaria',
+                                        'Kroasia' => 'Bahasa Kroasia',
+                                        'Serbia' => 'Bahasa Serbia',
+                                        'Slovakia' => 'Bahasa Slovakia',
+                                        'Slovenia' => 'Bahasa Slovenia',
+                                        'Lithuania' => 'Bahasa Lithuania',
+                                        'Latvia' => 'Bahasa Latvia',
+                                        'Estonia' => 'Bahasa Estonia',
+                                    ])
+                                    ->searchable()
+                                    // ->allowCustomOption()
                                     ->placeholder('Contoh: Indonesia, Inggris')
                                     ->required()
                                     ->columnSpan(1),
@@ -116,6 +174,12 @@ class BookResource extends Resource
                             ->helperText('Ukuran maksimal 2MB, dan hanya menerima gambar')
                             ->acceptedFileTypes(['image/*'])
                             ->columnSpanFull(),
+                        TextInput::make('stock')
+                            ->label('Stok Buku')
+                            ->placeholder('Masukkan jumlah stok buku')
+                            ->type('number')
+                            ->required()
+                            ->columnSpan(2),
                         Forms\Components\Select::make('status')
                             ->label('Status Buku')
                             ->options([
@@ -148,6 +212,8 @@ class BookResource extends Resource
                     ->searchable(),
                 TextColumn::make('category.name')
                     ->label('Kategori'),
+                TextColumn::make('stock')
+                    ->label('Stok Buku'),
                 Tables\Columns\TextColumn::make('publisher')
                     ->label("Penerbit")
                     ->searchable(),
