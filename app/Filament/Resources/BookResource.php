@@ -68,8 +68,7 @@ class BookResource extends Resource
                                 TextInput::make('slug')
                                     ->label('Slug')
                                     ->readOnly()
-
-                                    ->columnSpan(2),
+                                    ->columnSpan(1),
                             ]),
 
                         Forms\Components\Grid::make(3)

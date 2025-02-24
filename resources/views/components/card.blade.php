@@ -3,7 +3,7 @@
     <!-- Image Section -->
     <div class="h-48 w-full relative overflow-hidden rounded-t-xl">
         <img src="{{ $img }}" alt="Cover Buku {{ $title }}"
-            class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105">
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
         <!-- Category Badge -->
         <div class="absolute top-2 right-2">
             <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">
@@ -13,7 +13,7 @@
     </div>
 
     <!-- Content Section -->
-    <div class="p-4 flex flex-col h-[calc(100%-12rem)]">
+    <div class="p-4 flex flex-col min-h-[20rem)]">
         <!-- Title and Author -->
         <h3 class="font-merriweather font-bold text-gray-800 truncate-2-lines mb-2 leading-tight">
             {{ $title }}
