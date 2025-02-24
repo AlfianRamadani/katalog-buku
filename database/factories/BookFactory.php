@@ -17,8 +17,10 @@ class BookFactory extends Factory
      */
     public function definition(): array
     {
+        $title = $this->faker->sentence;
         return [
-            'title' => $this->faker->sentence,
+            'title' => $title,
+            'slug' => \Str::slug($title),
             'author' => $this->faker->name,
             'publisher' => $this->faker->company,
             'publication_year' => $this->faker->year,
@@ -27,7 +29,7 @@ class BookFactory extends Factory
             'category_id' => Category::inRandomOrder()->value('id'),
             'status' => $this->faker->randomElement(['available', 'not_available']),
             'language' => $this->faker->languageCode,
-            'cover' => asset('img.jpeg'),
+            'cover' => 'img.jpeg',
         ];
     }
 }

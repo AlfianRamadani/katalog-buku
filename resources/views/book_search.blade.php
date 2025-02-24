@@ -29,7 +29,7 @@
 
         <div class="grid md:grid-cols-4 sm:grid-cols-2 gap-6 items-center" id="post-container">
             @forelse ($book as $item)
-                <x-card :img="$item->cover" :category="$item->category" :title="$item->title" :description="$item->description"
+                <x-card :img="$item->cover" :rate="$item->rate" :category="$item->category" :title="$item->title" :description="$item->description"
                     class="transition-transform transform hover:scale-105 duration-300 shadow-lg rounded-xl" />
             @empty
                 <p class="text-gray-500 text-lg col-span-4 text-center">

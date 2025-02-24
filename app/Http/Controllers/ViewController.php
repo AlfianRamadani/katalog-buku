@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\HistoryLoanBook;
 use App\Models\RequestBook;
+use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx\Rels;
 use Illuminate\Support\Str;
@@ -20,14 +24,13 @@ class ViewController extends Controller
         //     'title' => 'Judul Luar Biasa',
         //     'description' => 'Deskripsi singkat tentang buku ini.',
         // ];
-        $book = Book::orderBy('created_at', 'desc')->paginate(10);
+        $book = Book::with('review')->orderBy('created_at', 'desc')->paginate(10)->through(function ($item) {
+            $item->rate = $item->review->avg('rate') ?? 0;
+            return $item;
+        });
+        $book->makeHidden('review');
         $categories = Category::get();
-        if ($request->ajax()) {
-            return response()->json([
-                'posts' => $book->items(), // Data
-                'nextPage' => $book->currentPage() < $book->lastPage() ? $book->currentPage() + 1 : null, // Halaman berikutnya
-            ]);
-        }
+
 
         return view('home.home', compact('book', 'categories'));
     }
@@ -60,30 +63,43 @@ class ViewController extends Controller
         $book = Book::whereHas('category', function ($query) use ($category) {
             $query->where('name', $category);
         })
-            ->where('title', 'like', "%$search%")
+            ->Orwhere('title', 'like', "%$search%")
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
-
-
+            ->paginate(10)->through(function ($item) {
+                $item->rate = $item->review->avg('rate') ?? 0;
+                return $item;
+            });;
         return view('book_search', compact('book', 'category', 'search'));
     }
     public function post(String $slug)
     {
         $book = Book::where('slug', $slug)->first();
-        return view('detail_book', compact('book'));
+        if (!$book) {
+            return view('404')->with('slug', $slug);
+        }
+        $reviews = Review::where('book_id', $book->id)->paginate(3);
+        return view('detail_book', compact('book', 'reviews'));
     }
-
     public function requestBook(Request $request)
     {
+        if (RateLimiter::tooManyAttempts('requestBook:' . optional($request->user())->id ?: $request->ip(), 5)) {
+            return redirect()->back()->with('alert', 'Telah mencapai batas maksimal request hari ini. Silakan coba lagi besok.');
+        }
+
         $validatedData = $request->validate([
             'name' => 'required|string',
         ]);
         try {
-            RequestBook::create($validatedData);
-            return redirect()->route('home')->with('status', true);
+            RequestBook::create([
+                'name' => $validatedData['name'],
+                'ip' => $request->ip(),
+                'user_agent' => $request->header('User-Agent'),
+            ]);
+            RateLimiter::hit('requestBook:' . optional($request->user())->id ?: $request->ip());
+            return redirect()->back()->with('alert', 'Terimakasih telah mebmberikan saran buku kepada kami, kami berharap dapat menyediakan buku yang anda inginkan. Terimakasih..');
         } catch (\Throwable $th) {
-            dd($th);
-            return redirect()->route('home')->with('status', false);
+            Log::error($th);
+            return redirect()->back()->with('alert', 'Terjadi kesalahan, silahkan coba lagi.');
         }
     }
 }

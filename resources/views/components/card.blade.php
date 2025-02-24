@@ -21,10 +21,21 @@
 
         <!-- Rating -->
         <div class="flex items-center mb-2">
-            <div class="flex text-yellow-400">
-                ★★★★★
+            <div class="flex">
+                @for ($i = 1; $i <= 5; $i++)
+                    @if ($i > $rate)
+                        <span class="text-xl text-slate-200">
+                            ★
+                        </span>
+                    @else
+                        <span class="text-xl text-yellow-400">
+                            ★
+                        </span>
+                    @endif
+                @endfor
+
             </div>
-            <span class="text-xs text-gray-500 ml-2">(4.9)</span>
+            <span class="text-xs text-gray-500 ml-2">({{ $rate }})</span>
         </div>
 
         <!-- Description -->

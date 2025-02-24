@@ -15,6 +15,7 @@ Route::get('/book/{slug}', [ViewController::class, 'post'])->name('post');
 Route::get('/about-us', function () {
     return view('about-us');
 });
+
 Route::get('/download-template', function () {
     $dateTime = date('Y-m-d_H-i');
     $fileName = 'base-product_' . $dateTime . '.xlsx';
@@ -24,4 +25,3 @@ Route::get('/download-template', function () {
 Route::post('/request/book', [ViewController::class, 'requestBook'])->name('request_book');
 
 Route::post('/contact/post', [ContactController::class, 'store'])->name('contact.store');
-

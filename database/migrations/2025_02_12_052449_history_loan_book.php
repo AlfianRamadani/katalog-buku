@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('member_id')->nullable();
             $table->foreignIdFor(Book::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->date('deadline')->nullable();
+            $table->enum('status', ['returned', 'not_returned'])->default('not_returned');
             $table->text('information')->nullable();
+            $table->datetime('returned_at')->nullable();
             $table->unsignedBigInteger('staff_id');
             $table->foreign('staff_id')->on('users')->references('id')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();

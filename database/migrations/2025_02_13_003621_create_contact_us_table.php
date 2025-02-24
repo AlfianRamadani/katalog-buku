@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('message');
+            $table->enum('status', ['read', 'unread'])->default('unread');
             $table->ipAddress();
             $table->timestamps();
         });

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Book;
+use App\Models\HistoryLoanBook;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignIdFor(Book::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignIdFor(HistoryLoanBook::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->text('descriptions');
             $table->timestamps();
+            $table->foreignIdFor(Book::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->enum('rate', [1, 2, 3, 4, 5]);
         });
     }

@@ -11,6 +11,5 @@ class ContactUs extends Model
 
     protected $table = 'contact_us'; // Sesuai nama tabel
 
-    protected $fillable = ['name', 'email', 'message', 'ip_address'];
+    protected $fillable = ['name', 'email', 'message', 'ip_address', 'status'];
 }
-

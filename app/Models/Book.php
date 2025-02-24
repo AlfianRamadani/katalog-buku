@@ -30,6 +30,14 @@ class Book extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function review()
+    {
+        return $this->hasMany(Review::class);
+    }
+    public function historyLoanBook()
+    {
+        return $this->hasMany(HistoryLoanBook::class);
+    }
     public function getCoverAttribute($value)
     {
         return $value

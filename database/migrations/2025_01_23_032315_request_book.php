@@ -15,6 +15,8 @@ return new class extends Migration
         Schema::create('request_book', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->ipAddress('ip');
+            $table->text('user_agent');
             $table->timestamps();
         });
     }

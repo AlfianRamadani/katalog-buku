@@ -1,3 +1,8 @@
+@if (session('alert'))
+    <script>
+        alert('{{ session('alert') }}');
+    </script>
+@endif
 @extends('layout.app')
 
 @section('title', 'Home Page')
@@ -7,7 +12,7 @@
     <div class="pb-40 ">
         <div class="grid md:grid-cols-4 grid-cols-2 pr-4 pb-10    gap-4   items-center" id="post-container">
             @foreach ($book as $item)
-                <x-card :img="$item->cover" :category="$item->category" :title="$item->title" :description="$item->description" />
+                <x-card :rate="$item->rate" :img="$item->cover" :category="$item->category" :title="$item->title" :description="$item->description" />
             @endforeach
         </div>
         @if ($book->lastPage() > 1)
@@ -17,7 +22,6 @@
                 </button>
             </div>
         @endif
-
     </div>
     <div class="pb-20">
         <x-request-book />
