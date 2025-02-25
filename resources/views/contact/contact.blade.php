@@ -4,7 +4,7 @@
     </script>
 @endif
 @extends('layout.app')
-
+@section('title', 'Hubungi Kami')
 @section('content')
     <div class="py-20">
         <h1 class="font-semibold text-4xl text-center mb-12">Pertanyaan Yang Sering Ditanyakan</h1>

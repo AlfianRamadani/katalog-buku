@@ -1,5 +1,7 @@
 @extends('layout.app')
 
+@section('title', 'Cari Buku')
+
 @section('content')
     <div class="pb-40 py-20 px-6 md:px-12">
         <button onclick="history.back()"

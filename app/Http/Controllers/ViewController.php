@@ -45,7 +45,10 @@ class ViewController extends Controller
         $perPage = 10;
 
         // Ambil data berdasarkan page yang diminta
-        $book = Book::paginate($perPage, ['*'], 'page', $page);
+        $book = Book::with('review', 'category')->inRandomOrder()->paginate($perPage, ['*'], 'page', $page)->through(function ($item) {
+            $item->rate = $item->review->avg('rate') ?? 0;
+            return $item;
+        });
 
         // Memeriksa apakah request AJAX
         return response()->json([
@@ -57,20 +60,37 @@ class ViewController extends Controller
     {
         $category = $request->query('category');
         $search = $request->query('search');
+
         if (!$category && !$search) {
             return redirect()->route('home');
         }
-        $book = Book::whereHas('category', function ($query) use ($category) {
-            $query->where('name', $category);
-        })
-            ->Orwhere('title', 'like', "%$search%")
-            ->orderBy('created_at', 'desc')
-            ->paginate(10)->through(function ($item) {
+
+        // Mulai query untuk Book
+        $bookQuery = Book::query();
+
+        // Filter berdasarkan kategori jika ada
+        if ($category) {
+            $bookQuery->whereHas('category', function ($query) use ($category) {
+                $query->where('name', $category);
+            });
+        }
+
+        // Filter berdasarkan pencarian jika ada
+        if ($search) {
+            $bookQuery->where('title', 'like', "%$search%");
+        }
+
+        // Ambil hasil dengan pagination
+        $book = $bookQuery->orderBy('created_at', 'desc')
+            ->paginate(10)
+            ->through(function ($item) {
                 $item->rate = $item->review->avg('rate') ?? 0;
                 return $item;
-            });;
+            });
+
         return view('book_search', compact('book', 'category', 'search'));
     }
+
     public function post(String $slug)
     {
         $book = Book::where('slug', $slug)->first();

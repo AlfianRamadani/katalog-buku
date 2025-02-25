@@ -15,12 +15,12 @@
     <!-- Content Section (Fixed Height) -->
     <div class="p-4 flex flex-col flex-1 min-h-[260px]">
         <!-- Title and Author -->
-        <h3 class="font-merriweather font-bold text-gray-800  leading-tight truncate line-clammp-2">
+        <h3 class="font-merriweather font-bold text-gray-800 overflow-hidden leading-tight truncate line-clammp-2">
             {{ $title }}
         </h3>
 
         <!-- Rating -->
-        <div class="flex items-center mb-3">
+        <div class="flex items-center ">
             <div class="flex">
                 @for ($i = 1; $i <= 5; $i++)
                     @if ($i > $rate)

@@ -1,5 +1,7 @@
 @extends('layout.app')
 
+@section('title', $book->title)
+
 @section('content')
     <div class=" mx-auto py-20 px-5">
         <!-- Wrapper for Book Details -->

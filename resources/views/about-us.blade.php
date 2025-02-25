@@ -1,4 +1,5 @@
 @extends('layout.app')
+@section('title', 'Tentang Kami')
 
 @section('content')
     <!DOCTYPE html>
