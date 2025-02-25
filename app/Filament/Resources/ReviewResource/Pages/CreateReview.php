@@ -9,8 +9,10 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateReview extends CreateRecord
 {
     protected static string $resource = ReviewResource::class;
+    public static ?string $title = 'Tambah Ulasan Buku';
+    public static ?string $breadcrumb = 'Tambah Ulasan Buku';
     protected function getRedirectUrl(): string
     {
-        return $this->previousUrl ?? $this->getResource()::getUrl('index');
+        return $this->getResource()::getUrl('index');
     }
 }

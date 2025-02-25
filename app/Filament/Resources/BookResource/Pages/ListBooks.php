@@ -23,32 +23,32 @@ class ListBooks extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Action::make('importProducts')
-                ->label('Import Product')
-                ->icon('heroicon-s-arrow-down-tray')
-                ->color('danger')
-                ->form([
-                    FileUpload::make('attachment')
-                        ->label('Upload Template Product')
-                ])
-                ->action(function (array $data) {
-                    $file = public_path('storage/' . $data['attachment']);
-                    try {
-                        Excel::import(new BookImport, $file);
-                        Notification::make()
-                            ->title('Product imported')
-                            ->success()
-                            ->send();
-                    } catch (\Exception $e) {
-                        Log::error('error import book data:' . $e->getMessage());
-                        Notification::make()
-                            ->title('Product failed to import')
-                            ->danger()
-                            ->send();
-                    }
-                }),
+            // Action::make('importProducts')
+            //     ->label('Import Buku')
+            //     ->icon('heroicon-s-arrow-down-tray')
+            //     ->color('danger')
+            //     ->form([
+            //         FileUpload::make('attachment')
+            //             ->label('Upload Template Product')
+            //     ])
+            //     ->action(function (array $data) {
+            //         $file = public_path('storage/' . $data['attachment']);
+            //         try {
+            //             Excel::import(new BookImport, $file);
+            //             Notification::make()
+            //                 ->title('Product imported')
+            //                 ->success()
+            //                 ->send();
+            //         } catch (\Exception $e) {
+            //             Log::error('error import book data:' . $e->getMessage());
+            //             Notification::make()
+            //                 ->title('Product failed to import')
+            //                 ->danger()
+            //                 ->send();
+            //         }
+            //     }),
             Action::make("Download Data")
-                ->label('Download Data')
+                ->label('Download Data Buku')
                 ->url(route('download-template'))
                 ->color('success'),
             CreateAction::make(),

@@ -12,6 +12,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 use Maatwebsite\Excel\Concerns\WithDrawings;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing;
 
@@ -29,71 +30,30 @@ class BookImport implements ToModel, WithHeadingRow, WithMultipleSheets, SkipsEm
     }
 
     /**
-     * Handle the image import process
-     */
-    private function handleImageImport($drawing): ?string
-    {
-        try {
-            $imageContents = null;
-            $extension = null;
-
-            if ($drawing instanceof MemoryDrawing) {
-                ob_start();
-                call_user_func(
-                    $drawing->getRenderingFunction(),
-                    $drawing->getImageResource()
-                );
-                $imageContents = ob_get_clean();
-
-                // Determine extension based on mime type
-                $extension = match ($drawing->getMimeType()) {
-                    MemoryDrawing::MIMETYPE_PNG => 'png',
-                    MemoryDrawing::MIMETYPE_GIF => 'gif',
-                    MemoryDrawing::MIMETYPE_JPEG => 'jpg',
-                    default => null
-                };
-            } elseif ($drawing instanceof Drawing) {
-                if (!$drawing->getPath()) {
-                    return null;
-                }
-
-                if ($drawing->getIsURL()) {
-                    $imageContents = file_get_contents($drawing->getPath());
-                    $extension = pathinfo($drawing->getPath(), PATHINFO_EXTENSION);
-                } else {
-                    $imageContents = file_get_contents($drawing->getPath());
-                    $extension = $drawing->getExtension();
-                }
-            }
-
-            if (!$imageContents || !$extension) {
-                return null;
-            }
-
-            // Generate a unique filename
-            $filename = $this->storageDirectory . '/' . Str::uuid() . '.' . $extension;
-
-            // Store the image
-            Storage::disk('public')->put($filename, $imageContents);
-
-            return $filename;
-        } catch (\Exception $e) {
-            // Log the error but don't halt the import
-            Log::error('Failed to import image: ' . $e->getMessage());
-            return null;
-        }
-    }
-
-    /**
      * @param array $row
      * @return Book|null
      */
     public function model(array $row)
     {
-        // Validate required fields
-        if (empty($row['title']) || empty($row['author'])) {
-            return null;
+        $spreadsheet = IOFactory::load($row['cover']);
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // **📌 Ambil semua gambar di Excel**
+        $drawings = $sheet->getDrawingCollection();
+        $images = [];
+
+        foreach ($drawings as $drawing) {
+            if ($drawing instanceof \PhpOffice\PhpSpreadsheet\Worksheet\Drawing) {
+                $imageExtension = pathinfo($drawing->getPath(), PATHINFO_EXTENSION);
+                $imageName = uniqid() . '.' . $imageExtension;
+                $imageContents = file_get_contents($drawing->getPath());
+
+                // **📌 Simpan gambar ke storage**
+                Storage::disk('public')->put("uploads/$imageName", $imageContents);
+                $images[$drawing->getCoordinates()] = "uploads/$imageName";
+            }
         }
+
 
         $bookData = [
             'title' => $row['title'],
@@ -123,25 +83,5 @@ class BookImport implements ToModel, WithHeadingRow, WithMultipleSheets, SkipsEm
         }
 
         return new Book($bookData);
-    }
-
-    /**
-     * @return \Closure
-     */
-    public function drawings()
-    {
-        return function ($worksheet) {
-            foreach ($worksheet->getDrawingCollection() as $drawing) {
-                // Get the cell coordinate where the image is placed
-                $coordinate = $drawing->getCoordinates();
-
-                // Process and store the image
-                $imagePath = $this->handleImageImport($drawing);
-
-                if ($imagePath) {
-                    $this->drawings[$coordinate] = $imagePath;
-                }
-            }
-        };
     }
 }

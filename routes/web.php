@@ -18,7 +18,7 @@ Route::get('/about-us', function () {
 
 Route::get('/download-template', function () {
     $dateTime = date('Y-m-d_H-i');
-    $fileName = 'base-product_' . $dateTime . '.xlsx';
+    $fileName = 'data-buku-' . $dateTime . '.xlsx';
     return Excel::download(new TemplateExport, $fileName);
 })->name('download-template');
 

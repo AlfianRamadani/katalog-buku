@@ -10,6 +10,13 @@ class EditBook extends EditRecord
 {
     protected static string $resource = BookResource::class;
 
+    public static ?string $title = 'Ubah Data Buku';
+    public static ?string $breadcrumb = 'Ubah Data Buku';
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

@@ -162,17 +162,25 @@ class BookResource extends Resource
                                 Forms\Components\DatePicker::make('publication_year')
                                     ->label('Tahun Terbit')
                                     ->placeholder('Pilih tahun terbit')
-                                    ->format('Y')
                                     ->required()
                                     ->columnSpan(1),
                             ]),
 
                         Forms\Components\FileUpload::make('cover')
                             ->label('Cover Buku')
+                            ->optimize('webp')
+                            ->afterStateHydrated(function ($record, $set) {
+                                if ($record) {
+                                    $originalPicture = $record->getRawOriginal('cover');
+                                    $set('cover', [$originalPicture]);
+                                }
+                            })
                             ->maxSize(2048)
                             ->helperText('Ukuran maksimal 2MB, dan hanya menerima gambar')
-                            ->acceptedFileTypes(['image/*'])
-                            ->columnSpanFull(),
+                            ->acceptedFileTypes(['image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/webp'])
+                            ->columnSpanFull()
+                            ->image()
+                            ->resize(50),
                         TextInput::make('stock')
                             ->label('Stok Buku')
                             ->placeholder('Masukkan jumlah stok buku')

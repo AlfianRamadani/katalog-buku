@@ -25,9 +25,9 @@ class ContactUsResource extends Resource
     protected static ?string $navigationLabel = 'Hubungi Kami';
     public static ?string $pluralModelLabel = ' Hubungi Kami';
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
-    public function viewAny(): bool
+    public static function canViewAny(): bool
     {
-        return auth()->guard('api')->user()->role === 'admin';
+        return auth()->guard('web')->user()->isAdmin();
     }
     public static function getNavigationBadge(): ?string
     {

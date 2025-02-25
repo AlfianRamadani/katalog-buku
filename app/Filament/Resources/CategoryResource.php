@@ -21,10 +21,7 @@ class CategoryResource extends Resource
     public static ?string $pluralModelLabel = 'Data Kategori';
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
-    public static function canViewAny(): bool
-    {
-        return auth()->guard('web')->user()->isAdmin();
-    }
+
     public static function form(Form $form): Form
     {
         return $form

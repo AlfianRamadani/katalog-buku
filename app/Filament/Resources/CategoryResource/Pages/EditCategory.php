@@ -9,6 +9,13 @@ use Filament\Resources\Pages\EditRecord;
 class EditCategory extends EditRecord
 {
     protected static string $resource = CategoryResource::class;
+    public static ?string $title = 'Ubah Data Kategori';
+    public static ?string $breadcrumb = 'Ubah Data Kategori';
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 
     protected function getHeaderActions(): array
     {

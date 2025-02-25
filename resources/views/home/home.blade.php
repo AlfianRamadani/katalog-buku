@@ -30,14 +30,30 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         let nextPage = 2;
-
         const postContainer = document.getElementById('post-container');
         const loadMore = document.getElementById('load-more');
+
+        // Fungsi untuk membuat rating stars
+        const createRatingStars = (rate) => {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                stars += i > rate ?
+                    '<span class="text-xl text-slate-200">★</span>' :
+                    '<span class="text-xl text-yellow-400">★</span>';
+            }
+            return stars;
+        };
+
+        // Fungsi untuk membuat slug
+        const createSlug = (text) => {
+            return text.toLowerCase()
+                .replace(/ /g, '-')
+                .replace(/[^\w-]+/g, '');
+        };
 
         const fetchPosts = async () => {
             if (nextPage) {
                 loadMore.classList.add('hidden');
-                console.log('Fetching posts...');
                 try {
                     const response = await fetch(`/fetch-posts?page=${nextPage}`);
                     const data = await response.json();
@@ -45,31 +61,59 @@
                     if (data.posts.length > 0) {
                         data.posts.forEach(post => {
                             const card = `
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 min-h-full transform hover:scale-105">
-                            <div class="w-full h-48">
-                                <img src="${post.cover}" alt="Cover Buku" class="w-full h-full object-cover">
-                            </div>
-                            <div class="flex flex-col w-full p-4">
-                                <div class="flex justify-between items-center mb-3">
-                                    <h3 class="text-lg font-bold font-sans text-gray-800 truncate">${post.title}</h3>
-                                    <span class="text-xs font-medium text-gray-500 bg-gray-100 rounded-full px-2 py-1">
-                                        ${post.category}
-                                    </span>
+                                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group relative border border-gray-100 w-72 h-[580px] flex flex-col">
+                                    <!-- Image Section -->
+                                    <div class="h-48 w-full relative overflow-hidden rounded-t-xl flex-shrink-0">
+                                        <img src="${post.cover}" alt="Cover Buku ${post.title}"
+                                            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                                        <!-- Category Badge -->
+                                        <div class="absolute top-2 right-2">
+                                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">
+                                                ${post.category.name}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Content Section -->
+                                    <div class="p-4 flex flex-col flex-1 min-h-[260px]">
+                                        <!-- Title -->
+                                        <h3 class="font-merriweather font-bold text-gray-800 mb-2 leading-tight line-clamp-2 h-14">
+                                            ${post.title}
+                                        </h3>
+
+                                        <!-- Rating -->
+                                        <div class="flex items-center mb-3">
+                                            <div class="flex">
+                                                ${createRatingStars(post.rate)}
+                                            </div>
+                                            <span class="text-xs text-gray-500 ml-2">(${post.rate})</span>
+                                        </div>
+
+                                        <!-- Description -->
+                                        <p class="text-sm text-gray-600 line-clamp-3 mb-4 font-roboto leading-relaxed flex-1">
+                                            ${post.description}
+                                        </p>
+
+                                        <!-- Bottom Section -->
+                                        <div class="pt-2 border-t border-gray-100">
+                                            <a href="/post/${createSlug(post.title)}"
+                                                class="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center transition-all">
+                                                Lihat Detail
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <p class="text-sm text-gray-600 leading-relaxed line-clamp-3 mb-4">
-                                    ${post.description}
-                                </p>
-                                <a href="#" class="text-sm font-medium text-blue-600 hover:underline transition-all duration-200 self-start">
-                                    Detail Buku →
-                                </a>
-                            </div>
-                        </div>`;
+                            `;
                             postContainer.insertAdjacentHTML('beforeend', card);
                         });
 
                         nextPage = data.nextPage;
                     } else {
                         nextPage = null;
+                        loadMore.remove();
                     }
                 } catch (error) {
                     console.error('Error loading posts:', error);
@@ -78,8 +122,7 @@
                 }
             }
         };
+
         loadMore.addEventListener('click', fetchPosts);
-
-
     });
 </script>

@@ -9,4 +9,10 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateCategory extends CreateRecord
 {
     protected static string $resource = CategoryResource::class;
+public static ?string $title = 'Ubah Data Kategori';
+public static ?string $breadcrumb = 'Ubah Data Kategori';
+protected function getRedirectUrl(): string
+{
+    return $this->getResource()::getUrl('index');
+}
 }

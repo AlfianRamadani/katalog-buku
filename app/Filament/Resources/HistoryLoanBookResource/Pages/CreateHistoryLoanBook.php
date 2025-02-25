@@ -12,8 +12,10 @@ class CreateHistoryLoanBook extends CreateRecord
 {
     protected static string $resource = HistoryLoanBookResource::class;
 
+    public static ?string $title = 'Tambah Data Peminjaman Buku';
+    public static ?string $breadcrumb = 'Tambah Data Peminjaman Buku';
     protected function getRedirectUrl(): string
     {
-        return $this->previousUrl ?? $this->getResource()::getUrl('index');
+        return $this->getResource()::getUrl('index');
     }
 }
