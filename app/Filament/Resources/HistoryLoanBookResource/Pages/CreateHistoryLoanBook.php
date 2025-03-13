@@ -7,6 +7,7 @@ use App\Models\HistoryLoanBook;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class CreateHistoryLoanBook extends CreateRecord
 {
@@ -17,5 +18,10 @@ class CreateHistoryLoanBook extends CreateRecord
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
+    }
+    protected function handleRecordCreation(array $data): Model
+    {
+        $data['staff_id'] = Auth::id();
+        return static::getModel()::create($data);
     }
 }

@@ -30,7 +30,7 @@ class ReviewResource extends Resource
             ->schema([
                 Select::make('history_loan_book_id')
                     ->label('Nama Peminjam')
-                    ->relationship('HistoryLoanBook', 'name', fn($query) => $query->where('status', 'returned'))
+                    ->relationship('HistoryLoanBook', 'name', fn($query) => $query->where('status', 'returned')->whereNot('is_review', '1'))
                     ->live()
                     ->afterStateUpdated(
                         fn($state, callable $set) =>

@@ -51,7 +51,7 @@
 
 <body>
     <div class="left">
-        <p>{{ $book->deweyDecimal->code }}</p>
+        <p>{{ $book->deweyDecimal->code ?? '' }}</p>
         <p>{{ strtoupper(substr($book->title, 0, 3)) }}</p>
         <p>p</p>
     </div>

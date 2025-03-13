@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\HistoryLoanBook;
+use App\Models\Review;
+use App\Observers\HistoryLoanBookObserver;
+use App\Observers\ReviewObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
@@ -27,5 +31,6 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('http');
         }
         Model::unguard();
+        Review::observe(ReviewObserver::class);
     }
 }

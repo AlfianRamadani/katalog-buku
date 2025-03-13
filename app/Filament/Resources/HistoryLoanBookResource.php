@@ -8,6 +8,7 @@ use App\Models\HistoryLoanBook;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
@@ -69,10 +70,6 @@ class HistoryLoanBookResource extends Resource
                             ->nullable()
                             ->locale('id')
                             ->minDate(now()),
-
-                        Forms\Components\TextInput::make('staff_id')
-                            ->label('Petugas')
-                            ->required(),
                     ]),
             ]);
     }
