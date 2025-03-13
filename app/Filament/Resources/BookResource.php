@@ -62,10 +62,9 @@ class BookResource extends Resource
                                         if (($get('slug') ?? '') !== Str::slug($old)) {
                                             return;
                                         }
-
                                         $set('slug', Str::slug($state));
                                     }),
-                                TextInput::make('slug')
+                                Forms\Components\TextInput::make('slug')
                                     ->label('Slug')
                                     ->readOnly()
                                     ->columnSpan(3),
@@ -95,6 +94,19 @@ class BookResource extends Resource
 
                         Forms\Components\Grid::make(3)
                             ->schema([
+                                Forms\Components\TextInput::make('publisher')
+                                    ->label('Penerbit')
+                                    ->placeholder('Masukkan nama penerbit')
+                                    ->required()
+                                    ->columnSpan(1),
+
+                                Forms\Components\Select::make('publication_year')
+                                    ->label('Tahun Terbit')
+                                    ->options(array_combine(range(date('Y'), 1900), range(date('Y'), 1900)))
+                                    ->searchable()
+                                    ->required()
+                                    ->columnSpan(1),
+
                                 Forms\Components\Select::make('language')
                                     ->label('Bahasa')
                                     ->options([
@@ -124,45 +136,57 @@ class BookResource extends Resource
                                         'Thailand' => 'Bahasa Thailand',
                                         'Filipina' => 'Bahasa Filipina',
                                         'Malaysia' => 'Bahasa Malaysia',
-                                        'Hindi' => 'Bahasa Hindi',
-                                        'Bengali' => 'Bahasa Bengali',
-                                        'Punjabi' => 'Bahasa Punjabi',
-                                        'Tamil' => 'Bahasa Tamil',
-                                        'Telugu' => 'Bahasa Telugu',
-                                        'Marathi' => 'Bahasa Marathi',
-                                        'Gujarati' => 'Bahasa Gujarati',
-                                        'Kannada' => 'Bahasa Kannada',
-                                        'Malayalam' => 'Bahasa Malayalam',
-                                        'Urdu' => 'Bahasa Urdu',
-                                        'Persia' => 'Bahasa Persia',
-                                        'Hebrew' => 'Bahasa Hebrew',
-                                        'Ukraina' => 'Bahasa Ukraina',
-                                        'Rumania' => 'Bahasa Rumania',
-                                        'Bulgaria' => 'Bahasa Bulgaria',
-                                        'Kroasia' => 'Bahasa Kroasia',
-                                        'Serbia' => 'Bahasa Serbia',
-                                        'Slovakia' => 'Bahasa Slovakia',
-                                        'Slovenia' => 'Bahasa Slovenia',
-                                        'Lithuania' => 'Bahasa Lithuania',
-                                        'Latvia' => 'Bahasa Latvia',
-                                        'Estonia' => 'Bahasa Estonia',
                                     ])
                                     ->searchable()
-                                    // ->allowCustomOption()
                                     ->placeholder('Contoh: Indonesia, Inggris')
                                     ->required()
                                     ->columnSpan(1),
+                            ]),
 
-                                Forms\Components\TextInput::make('publisher')
-                                    ->label('Penerbit')
-                                    ->placeholder('Masukkan nama penerbit')
-                                    ->required()
+                        Forms\Components\Grid::make(3)
+                            ->schema([
+                                Forms\Components\TextInput::make('edition')
+                                    ->label('Edisi')
+                                    ->placeholder('Masukkan edisi buku')
+                                    ->nullable()
                                     ->columnSpan(1),
 
-                                Forms\Components\DatePicker::make('publication_year')
-                                    ->label('Tahun Terbit')
-                                    ->placeholder('Pilih tahun terbit')
-                                    ->required()
+                                Forms\Components\TextInput::make('city_publisher')
+                                    ->label('Kota Penerbit')
+                                    ->placeholder('Masukkan kota penerbit')
+                                    ->nullable()
+                                    ->columnSpan(1),
+
+                                Forms\Components\TextInput::make('total_page')
+                                    ->label('Jumlah Halaman')
+                                    ->placeholder('Masukkan total halaman')
+                                    ->numeric()
+                                    ->nullable()
+                                    ->columnSpan(1),
+                            ]),
+
+                        Forms\Components\Grid::make(3)
+                            ->schema([
+                                Forms\Components\TextInput::make('total_roman_page')
+                                    ->label('Jumlah Halaman Romawi')
+                                    ->placeholder('Masukkan jumlah halaman romawi')
+                                    ->numeric()
+                                    ->nullable()
+                                    ->columnSpan(1),
+
+                                Forms\Components\TextInput::make('book_length')
+                                    ->label('Panjang Buku')
+                                    ->placeholder('Masukkan panjang buku dalam cm')
+                                    ->nullable()
+                                    ->columnSpan(1),
+
+                                Forms\Components\Select::make('dewey_decimal_id')
+                                    ->label('Klasifikasi Desimal Dewey')
+                                    ->relationship('deweyDecimal', 'category')
+                                    ->getOptionLabelFromRecordUsing(fn($record) => "{$record->category} - {$record->code}")
+                                    ->searchable()
+                                    ->preload()
+                                    ->nullable()
                                     ->columnSpan(1),
                             ]),
 
@@ -181,12 +205,14 @@ class BookResource extends Resource
                             ->columnSpanFull()
                             ->image()
                             ->resize(50),
-                        TextInput::make('stock')
+
+                        Forms\Components\TextInput::make('stock')
                             ->label('Stok Buku')
                             ->placeholder('Masukkan jumlah stok buku')
                             ->type('number')
                             ->required()
                             ->columnSpan(2),
+
                         Forms\Components\Select::make('status')
                             ->label('Status Buku')
                             ->options([
@@ -207,6 +233,7 @@ class BookResource extends Resource
 
 
 
+
     public static function table(Table $table): Table
     {
         return $table
@@ -224,10 +251,7 @@ class BookResource extends Resource
                 Tables\Columns\TextColumn::make('publisher')
                     ->label("Penerbit")
                     ->searchable(),
-                Tables\Columns\TextColumn::make('publication_year')
-                    ->label("Tahun Terbit")
-                    ->date()
-                    ->sortable(),
+
                 ImageColumn::make('cover')
                     ->label("Cover Buku"),
                 Tables\Columns\TextColumn::make('isbn_number')
@@ -240,9 +264,7 @@ class BookResource extends Resource
             ->actions([
                 Tables\Actions\Action::make('Cetak Katalog')
                     ->label('Cetak Katalog')
-                    ->action(function ($record) {
-                        BookResource::printCatalog($record);
-                    }),
+                    ->url(fn($record) => route('print.catalog', ['id' => $record->id]), shouldOpenInNewTab: true),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -251,36 +273,7 @@ class BookResource extends Resource
                 ]),
             ]);
     }
-    public static function printCatalog($data)
-    {
-        // Tentukan data yang ingin dicetak
-        $title = $data->title;
-        $author = $data->author;
-        $publisher = $data->publisher;
-        $publicationYear = $data->publication_year;
-        $isbnNumber = $data->isbn_number;
 
-        // Buat tampilan HTML untuk dicetak
-        $html = "
-            <html>
-                <head>
-                    <title>Katalog Buku</title>
-                </head>
-                <body>
-                    <h1>Katalog Buku</h1>
-                    <p><strong>Judul:</strong> {$title}</p>
-                    <p><strong>Penulis:</strong> {$author}</p>
-                    <p><strong>Penerbit:</strong> {$publisher}</p>
-                    <p><strong>Tahun Terbit:</strong> {$publicationYear}</p>
-                    <p><strong>ISBN:</strong> {$isbnNumber}</p>
-                </body>
-            </html>
-        ";
-
-        // Cetak tampilan HTML
-        echo $html;
-        echo "<script>window.print();</script>";
-    }
 
     public static function fetchBookData($data)
     {

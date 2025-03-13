@@ -44,4 +44,8 @@ class Book extends Model
             ? asset(Storage::url($value))
             : asset('img.jpeg');
     }
+    public function deweyDecimal()
+    {
+        return $this->belongsTo(DeweyDecimal::class);
+    }
 }

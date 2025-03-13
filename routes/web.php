@@ -2,6 +2,7 @@
 
 use App\Exports\TemplateExport;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PrintController;
 use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
@@ -25,3 +26,5 @@ Route::get('/download-template', function () {
 Route::post('/request/book', [ViewController::class, 'requestBook'])->name('request_book');
 
 Route::post('/contact/post', [ContactController::class, 'store'])->name('contact.store');
+
+Route::get('print/catalog', [PrintController::class, 'catalog'])->name('print.catalog');
